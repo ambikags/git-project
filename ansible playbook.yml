@@ -1,0 +1,8 @@
+---
+- name: This palybook creates files
+  hosts: all
+  tasks:
+  - name: creating file
+    file: 
+      path: /home/ansadmin/hosts
+      state: directory

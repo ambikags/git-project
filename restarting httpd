@@ -1,0 +1,14 @@
+---
+- name: copying index and restarting httpd
+  hosts: redhat
+  become: true
+  tasks:
+  - name: copy index.html to var loc
+    copy:
+      src: /home/ansadmin/index.html
+      dest: /var/www/html
+
+  - name: restart httpd
+    service:
+      name: httpd
+      state: restarted

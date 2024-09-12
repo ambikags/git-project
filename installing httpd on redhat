@@ -1,0 +1,34 @@
+---
+- name: this playbook installs httpd on all servers
+  hosts: all
+  become: true
+  tasks:
+  - name: installing httpd on redhat
+    yum: 
+      name: httpd 
+      state: installed
+    when: ansible_os_family == "redhat"
+
+
+  - name: start httpd on redhat
+    yum: 
+      name: httpd 
+      state: started
+    when: ansible_os_family == "redhat"
+
+  - name: installing apache
+    apt:
+      name: apache2 
+      state: present
+    when: ansible_os_family == "debian"
+
+  - name: starting apache
+    service:
+       name: apache2 
+       state: started
+    when: ansible_os_family == "debian"
+
+  - name: copy index.html to var loc
+    copy:
+      src: /home/ansadmin/index.html
+      dest: /var/www/html
