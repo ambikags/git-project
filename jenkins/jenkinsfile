@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
+        stage('CPU Details') {
+            steps {
+                script {
+                    // Capture CPU details
+                    def cpuDetails = sh(script: 'lscpu', returnStdout: true)
+                    echo "CPU Details:\n${cpuDetails}"
+                }
+            }
+        }
+    }
+}
