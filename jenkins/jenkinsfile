@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'Dev'
+    }
 
     stages {
         stage('Build') {
@@ -12,10 +14,22 @@ pipeline {
                 echo 'Testing..'
             }
         }
+        stage('CPU Info') {
+            steps {
+                script {
+                    // On Linux, fetch CPU details using shell commands
+                    echo 'Fetching CPU details...'
+                    sh 'lscpu' // To display CPU architecture information
+                    sh 'cat /proc/cpuinfo' // To display detailed CPU information
+                    sh 'top -bn1 | grep "Cpu(s)"' // To show current CPU usage
+                }
+            }
+        }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                echo 'Deploying...'
             }
         }
     }
 }
+ 
